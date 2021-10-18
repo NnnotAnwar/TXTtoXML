@@ -1,0 +1,80 @@
+@import "reset.scss";
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+
+$mbottom: 15px;
+
+body {
+    background-color: #d7d3ff;
+    font-family: "Varela Round", sans-serif;
+    font-size: 24px;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: 30px;
+    @media (min-width: 576px) {
+        max-width: 540px;
+    }
+    @media (min-width: 768px) {
+        max-width: 720px;
+    }
+    @media (min-width: 992px) {
+        max-width: 960px;
+    }
+    @media (min-width: 1200px) {
+        max-width: 1140px;
+    }
+    @media (min-width: 1400px) {
+        max-width: 1320px;
+    }
+}
+
+.logotype {
+    max-width: 200px;
+    margin-bottom: $mbottom;
+}
+
+.file__converter {
+    text-align: center;
+    &_header h1 {
+        font-size: 42px;
+        margin-bottom: $mbottom;
+    }
+    &_content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #ffffff6e;
+        min-height: 230px;
+        align-items: center;
+        min-width: 100%;
+        @media (min-width: 576px) {
+            max-width: 100%;
+        }
+    }
+    #txtLoader {
+        max-width: 230px;
+        padding-left: 10px;
+        margin: 0 auto;
+        text-align: center;
+        margin-bottom: $mbottom;
+    }
+    &_downloadbtn {
+        padding: 10px 20px;
+        font-size: 24px;
+        background-color: #3c70aa;
+        color: #fff;
+        border-radius: 5px;
+        transition: all 0.2s;
+        &:hover {
+            background-color: #335e91;
+        }
+        &:active {
+            background-color: #214774;
+        }
+    }
+    .disabled {
+        background-color: #5f5f5f;
+    }
+}
