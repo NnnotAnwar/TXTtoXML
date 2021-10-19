@@ -8,6 +8,7 @@
     <title>TXT to XML</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -20,8 +21,9 @@
             <div class="file__converter_content">
                 <input type="file" name="txtLoader" id="txtLoader" />
                 <button type="button" id="download" class="file__converter_downloadbtn disabled" disabled>
-                    <i class="fas fa-file-download"></i> Download
+                    <i class="fas fa-file-download"></i> Convert to XML
                 </button>
+                <textarea name="convertedFile" id="convertedFile" disabled></textarea>
             </div>
         </div>
     </div>
