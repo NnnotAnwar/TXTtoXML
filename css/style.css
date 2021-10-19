@@ -204,11 +204,12 @@ body {
 }
 
 #convertedFile {
-  min-width: 80%;
+  min-width: 90%;
   min-height: 380px;
   overflow: auto;
   font-size: 14px;
   resize: none;
   background-color: #00000000;
+  margin-bottom: 15px;
 }
 /*# sourceMappingURL=style.css.map */
