@@ -180,7 +180,7 @@ body {
   margin-bottom: 15px;
 }
 
-.file__converter_downloadbtn {
+.file__converter_convertbtn {
   padding: 10px 20px;
   font-size: 24px;
   background-color: #3c70aa;
@@ -191,11 +191,11 @@ body {
   margin-bottom: 15px;
 }
 
-.file__converter_downloadbtn:hover {
+.file__converter_convertbtn:hover {
   background-color: #335e91;
 }
 
-.file__converter_downloadbtn:active {
+.file__converter_convertbtn:active {
   background-color: #214774;
 }
 
