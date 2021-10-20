@@ -109,76 +109,110 @@ function TXTtoXMLConverter() {
                 for (let i = 0; i < jobDesc.length; i++) {
 
                     // проверка на наличие строки Характеристика работ
-                    if (text.match(regJobDescription)[i] !== undefined) {
-                        if (text.match(regJobDescription)[i] !== null) {
+                    switch (text.match(regJobDescription)[i]) {
+                        case undefined:
+                        case null:
+                            // помещение указателя "Характеристка не указана", при отсутвии строки(провал проверки)
+                            jobDesc[i].innerHTML = 'Характеристка не указана.'
+                            break;
+
+                        default:
                             // помещение найденной строки в заголовок характеристики
                             jobDesc[i].innerHTML = `<job-description-title>${text.match(regJobDescription)[i]}</job-description-title>`
-                            // помещение указателя "Характеристка не указана", при отсутвии строки(провал проверки)
-                        } else jobDesc[i].innerHTML = 'Характеристка не указана.'
-                    } else jobDesc[i].innerHTML = 'Характеристка не указана.'
+                            break;
+                    }
                     // проверка на наличие строк после строки Характеристика работ
-                    if (text.match(regJobSubDescription)[i] !== undefined) {
-                        if (text.match(regJobSubDescription)[i] !== null) {
-                            // удаление Характеристика работ из найденного совпадение(возвращается ["", "нужная нам строка"])
+                    switch (text.match(regJobSubDescription)[i]) {
+                        case undefined:
+                        case null:
+                            break;
+                        default:
+                            // удаление cтроки Характеристика работ из найденного совпадение(возвращается ["", "нужная нам строка"])
                             // помещение нужной строки в переменную и включение его в документ после заголовка Характеристики
                             jobSubDesc = text.match(regJobSubDescription)[i].split(/[Хх].+работ[\.\s,:-]/gi)[1]
                             const subJobDesc = XMLDoc.createElement('job-subdescription')
                             subJobDesc.innerHTML = jobSubDesc
                             jobDesc[i].appendChild(subJobDesc)
-                        }
+                            break;
                     }
-
                     // проверка на наличие строки Должен знать(проверки в процессе оптимизации)
-                    if (text.match(regJobHaveToKnow) !== undefined) {
-                        if (text.match(regJobHaveToKnow) !== null) {
-                            if (text.match(regJobHaveToKnow)[i] !== undefined) {
-                                if (text.match(regJobHaveToKnow)[i] !== null) {
+                    switch (text.match(regJobHaveToKnow)) {
+                        case undefined:
+                        case null:
+                            // помещение указателя 'Не указаны необходимые знания', при отсутствии строки(провал проверки)
+                            jobHaveToKnow[i].innerHTML = 'Не указаны необходимые знания'
+                            break;
+                        default:
+                            switch (text.match(regJobHaveToKnow)[i]) {
+                                case undefined:
+                                case null:
+                                    // помещение указателя 'Не указаны необходимые знания', при отсутствии строки(провал проверки)
+                                    jobHaveToKnow[i].innerHTML = 'Не указаны необходимые знания'
+                                    break;
+                                default:
                                     // помещение строки в элемент заголовка
                                     jobHaveToKnow[i].innerHTML = `<job-have-to-know-title>${text.match(regJobHaveToKnow)[i]}</job-have-to-know-title>`
-                                    // помещение указателя 'Не указаны необходимые знания', при отсутствии строки(провал проверки)
-                                } else jobHaveToKnow[i].innerHTML = 'Не указаны необходимые знания'
-                            } else jobHaveToKnow[i].innerHTML = 'Не указаны необходимые знания'
-                        } else jobHaveToKnow[i].innerHTML = 'Не указаны необходимые знания'
-                    } else jobHaveToKnow[i].innerHTML = 'Не указаны необходимые знания'
-
+                                    break;
+                            }
+                            break;
+                    }
                     // проверка на наличие строк после строки Должен знать
-                    if (text.match(regJobSubHaveToKnow) !== undefined) {
-                        if (text.match(regJobSubHaveToKnow) !== null) {
-                            if (text.match(regJobSubHaveToKnow)[i] !== undefined) {
-                                if (text.match(regJobSubHaveToKnow)[i] !== null) {
+                    switch (text.match(regJobSubHaveToKnow)) {
+                        case undefined:
+                        case null:
+                            break;
+                        default:
+                            switch (text.match(regJobSubHaveToKnow)[i]) {
+                                case undefined:
+                                case null:
+                                    break;
+                                default:
                                     // удаление Должен знать из найденного совпадение(возвращается ["", "нужная нам строка"])
                                     // помещение нужной строки в переменную и включение его в документ после заголовка Должен знать
                                     jobSubHaveToKnow = text.match(regJobSubHaveToKnow)[i].split(/^[Дд].+знать[\.\s,:-]/gi)[1]
                                     const subJobHaveToKnow = XMLDoc.createElement('job-have-to-know-sub')
                                     subJobHaveToKnow.innerHTML = jobSubHaveToKnow
                                     jobHaveToKnow[i].appendChild(subJobHaveToKnow)
-                                }
+                                    break;
                             }
-                        }
+                            break;
                     }
 
-                    // похожий код
-                    if (text.match(regJobAddition) !== undefined) {
-                        if (text.match(regJobAddition) !== null) {
-                            if (text.match(regJobAddition)[i] !== undefined) {
-                                if (text.match(regJobAddition)[i] !== null) {
+                    // похожий код с Примечанием
+                    switch (text.match(regJobAddition)) {
+                        case undefined:
+                        case null:
+                            jobAddition[i].innerHTML = 'Не указано примечание'
+                            break;
+                        default:
+                            switch (text.match(regJobAddition)[i]) {
+                                case undefined:
+                                case null:
+                                    jobAddition[i].innerHTML = 'Не указано примечание'
+                                    break;
+                                default:
                                     jobAddition[i].innerHTML = `<job-addition-title>${text.match(regJobAddition)[i]}</job-addition-title>`
-                                } else jobAddition[i].innerHTML = 'Не указано примечание'
-                            } else jobAddition[i].innerHTML = 'Не указано примечание'
-                        } else jobAddition[i].innerHTML = 'Не указано примечание'
-                    } else jobAddition[i].innerHTML = 'Не указано примечание'
-
-                    if (text.match(regJobSubAddition) !== undefined) {
-                        if (text.match(regJobSubAddition) !== null) {
-                            if (text.match(regJobSubAddition)[i] !== undefined) {
-                                if (text.match(regJobSubAddition)[i] !== null) {
+                                    break;
+                            }
+                            break;
+                    }
+                    switch (text.match(regJobSubAddition)) {
+                        case undefined:
+                        case null:
+                            break;
+                        default:
+                            switch (text.match(regJobSubAddition)[i]) {
+                                case undefined:
+                                case null:
+                                    break;
+                                default:
                                     jobSubAddition = text.match(regJobSubAddition)[i].split(/^[Пп].+ни[ея][\.\s,:-]/gi)[1]
                                     const subJobAddition = XMLDoc.createElement('job-addition-sub')
                                     subJobAddition.innerHTML = jobSubAddition
                                     jobAddition[i].appendChild(subJobAddition)
-                                }
+                                    break;
                             }
-                        }
+                            break;
                     }
                 }
 
